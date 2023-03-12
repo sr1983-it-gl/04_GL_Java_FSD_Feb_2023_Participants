@@ -8,6 +8,7 @@ public interface ICredentialService {
 //			String lastName, String department, 
 //				String param4, String param5);
 //	
+	
 	String generateEmailAddress(Employee employee);
 
 	void displayCredentials(Employee employee);
