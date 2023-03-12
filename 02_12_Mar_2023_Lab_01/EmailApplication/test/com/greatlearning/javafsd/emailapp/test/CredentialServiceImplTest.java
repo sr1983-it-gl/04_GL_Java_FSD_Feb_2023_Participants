@@ -10,7 +10,9 @@ public class CredentialServiceImplTest {
 		
 //		testEmailAddressGeneration();
 		
-		testPasswordGeneration();
+//		testPasswordGeneration();
+		
+		testDisplayCredentials();
 	}
 
 
@@ -35,5 +37,21 @@ public class CredentialServiceImplTest {
 		String password  = serviceImpl.generatePassword();
 		System.out.println("Password ->" + password);
 		
+	}
+	
+	
+	static void testDisplayCredentials() {
+		
+
+		CredentialServiceImpl serviceImpl = 
+				new CredentialServiceImpl();
+
+		Employee sunil = new Employee("Sunil", "Kumar", "technical");
+		
+		serviceImpl.generateEmailAddress(sunil);
+		String password = serviceImpl.generatePassword();
+		sunil.setPassword(password);
+		
+		serviceImpl.displayCredentials(sunil);
 	}
 }

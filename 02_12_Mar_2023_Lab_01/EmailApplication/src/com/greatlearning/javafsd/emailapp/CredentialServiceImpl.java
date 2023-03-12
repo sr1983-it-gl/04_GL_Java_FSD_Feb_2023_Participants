@@ -43,10 +43,24 @@ public class CredentialServiceImpl
 
 	@Override
 	public void displayCredentials(Employee employee) {
-		// TODO Auto-generated method stub
+
+		StringBuilder messageBuilder = new StringBuilder();
+		messageBuilder.append("Dear ");
+		messageBuilder.append(employee.getFirstName());
+		messageBuilder.append(", your generated credentials are as follows");
 		
+		// \r\n \n
+		String newline = System.getProperty("line.separator");
+		messageBuilder.append(newline);
+		messageBuilder.append("Email        --->  ");
+		messageBuilder.append(employee.getEmailAddress());
+		
+		messageBuilder.append(newline);
+		messageBuilder.append("Password ---> ");
+		messageBuilder.append(employee.getPassword());
+		
+		String finalMessage = messageBuilder.toString();
+		
+		System.out.println(finalMessage);
 	}
-
-	
-
 }
