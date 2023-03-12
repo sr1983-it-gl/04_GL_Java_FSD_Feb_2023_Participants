@@ -1,5 +1,9 @@
 package com.greatlearning.javafsd.emailapp;
 
+import com.greatlearning.javafsd.emailapp.model.Employee;
+import com.greatlearning.javafsd.emailapp.service.ICredentialService;
+import com.greatlearning.javafsd.emailapp.service.PasswordGenerator;
+
 public class CredentialServiceImpl 
 	implements ICredentialService{
 	
@@ -27,9 +31,9 @@ public class CredentialServiceImpl
 		// Concatenate strings
 		StringBuilder emailBuilder = new StringBuilder();
 		
-		emailBuilder.append(firstName);
+		emailBuilder.append(firstName.toLowerCase());
 		emailBuilder.append(".");
-		emailBuilder.append(lastName);
+		emailBuilder.append(lastName.toLowerCase());
 		emailBuilder.append("@");
 		emailBuilder.append(department);
 		emailBuilder.append(".gl.com");

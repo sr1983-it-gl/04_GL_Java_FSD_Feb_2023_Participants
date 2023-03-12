@@ -1,6 +1,6 @@
 package com.greatlearning.javafsd.emailapp.test;
 
-import com.greatlearning.javafsd.emailapp.PasswordGenerator;
+import com.greatlearning.javafsd.emailapp.service.PasswordGenerator;
 
 public class PasswordGeneratorTest {
 

@@ -1,6 +1,6 @@
 package com.greatlearning.javafsd.emailapp.test;
 
-import com.greatlearning.javafsd.emailapp.Employee;
+import com.greatlearning.javafsd.emailapp.model.Employee;
 
 public class EmployeeTest {
 

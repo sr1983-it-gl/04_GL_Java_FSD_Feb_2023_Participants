@@ -1,4 +1,4 @@
-package com.greatlearning.javafsd.emailapp;
+package com.greatlearning.javafsd.emailapp.service;
 
 import java.util.Random;
 

@@ -1,8 +1,8 @@
 package com.greatlearning.javafsd.emailapp.test;
 
 import com.greatlearning.javafsd.emailapp.CredentialServiceImpl;
-import com.greatlearning.javafsd.emailapp.Employee;
-import com.greatlearning.javafsd.emailapp.PasswordGenerator;
+import com.greatlearning.javafsd.emailapp.model.Employee;
+import com.greatlearning.javafsd.emailapp.service.PasswordGenerator;
 
 public class CredentialServiceImplTest {
 

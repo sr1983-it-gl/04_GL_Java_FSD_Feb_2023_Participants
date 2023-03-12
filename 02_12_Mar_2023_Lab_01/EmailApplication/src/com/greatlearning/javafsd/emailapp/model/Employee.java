@@ -1,4 +1,4 @@
-package com.greatlearning.javafsd.emailapp;
+package com.greatlearning.javafsd.emailapp.model;
 
 public class Employee {
 

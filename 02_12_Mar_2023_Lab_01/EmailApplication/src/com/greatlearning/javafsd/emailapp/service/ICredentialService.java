@@ -1,4 +1,6 @@
-package com.greatlearning.javafsd.emailapp;
+package com.greatlearning.javafsd.emailapp.service;
+
+import com.greatlearning.javafsd.emailapp.model.Employee;
 
 public interface ICredentialService {
 
