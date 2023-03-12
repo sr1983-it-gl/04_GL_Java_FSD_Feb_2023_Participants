@@ -2,13 +2,15 @@ package com.greatlearning.javafsd.emailapp;
 
 public class CredentialServiceImpl 
 	implements ICredentialService{
-
-//	Employee employee
 	
 	@Override
 	public String generatePassword() {
-		// TODO Auto-generated method stub
-		return null;
+		
+		PasswordGenerator generator = new PasswordGenerator();
+		
+		String password = generator.generate();
+		
+		return password;
 	}
 
 	@Override
