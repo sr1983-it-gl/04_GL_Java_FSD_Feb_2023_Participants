@@ -1,0 +1,28 @@
+Total number of orders for Mango milkshake
+5
+Total number of orders for Orange milkshake
+4
+Total number of orders for Pineapple milkshake
+4
+
+Minimum time needed to deliver all orders is: 7
+
+Test case 2: 
+Total number of orders for Mango milkshake
+3
+Total number of orders for Orange milkshake
+0
+Total number of orders for Pineapple milkshake
+0
+
+Minimum time needed to deliver all orders is: 3
+
+Test case 3: 
+Total number of orders for Mango milkshake
+1
+Total number of orders for Orange milkshake
+4
+Total number of orders for Pineapple milkshake
+2
+
+Minimum time needed to deliver all orders is: 4
