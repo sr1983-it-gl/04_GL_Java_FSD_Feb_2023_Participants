@@ -1,0 +1,7 @@
+create table Book
+(
+Book_Id int primary key , 
+Book_Name varchar(50), 
+Category varchar(35), 
+Total_Quantity int not null
+);

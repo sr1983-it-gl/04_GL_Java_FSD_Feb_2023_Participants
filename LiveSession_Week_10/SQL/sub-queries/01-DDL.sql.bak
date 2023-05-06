@@ -1,0 +1,12 @@
+create table gdp (
+	ranking int,
+    economy varchar(20),
+    gdp bigint
+);
+
+create table Population (
+	ranking int,
+    economy varchar(20),
+    population bigint
+);
+

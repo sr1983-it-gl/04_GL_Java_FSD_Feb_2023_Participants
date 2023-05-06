@@ -1,0 +1,12 @@
+select avg(No_Of_Courses) from 
+(select username, count(CourseName) as No_Of_Courses from Coursestats GROUP BY username) as Table1;
+
+select username from coursestats GROUP BY UserName HAVING count(coursename) >= (select avg(No_Of_Courses) from 
+(select count(CourseName) as No_Of_Courses from Coursestats GROUP BY username) as Table1);
+
+select username, CourseName from coursestats WHERE UserName in 
+(select username from coursestats GROUP BY UserName HAVING count(coursename) >= 
+(select avg(No_Of_Courses) from 
+(select count(CourseName) as No_Of_Courses from Coursestats GROUP BY username) as Table1));
+
+
