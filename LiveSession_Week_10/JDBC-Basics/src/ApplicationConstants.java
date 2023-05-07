@@ -3,6 +3,7 @@ public class ApplicationConstants {
 
 	public static String DRIVER_CLASS_NAME 
 		= "com.mysql.cj.jdbc.Driver";
+		// com.oracle.
 	
 	public static String CONNECTION_URL
 		=	"jdbc:mysql://localhost:3306/library_database";

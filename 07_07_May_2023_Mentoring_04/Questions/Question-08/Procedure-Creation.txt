@@ -1,0 +1,25 @@
+-- Procedure Creation
+CREATE DEFINER=`root`@`localhost` PROCEDURE `DisplayProductsPrice`()
+BEGIN
+
+select * from Pricing where month = 'May' and year = '2021';
+
+END
+
+-- Calling the Procedure
+call DisplayProductsPrice();
+
+-- Procedure Creation
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `DisplayProductsPrice_v2`(
+I_MONTH VARCHAR(10), I_YEAR INT
+)
+BEGIN
+
+select * from Pricing where month = I_MONTH and year = I_YEAR;
+
+END
+
+-- Calling the Procedure
+CALL `lpg`.`DisplayProductsPrice_v2`('February', 2021);
+
