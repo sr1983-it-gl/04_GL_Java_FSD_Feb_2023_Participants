@@ -1,4 +1,4 @@
-select C.CAT_ID, C.CAT_NAME, SP_P.PRO_ID, SP_P.PRO_NAME, SP_P.PRO_DESC,
+select C.CAT_ID, C.CAT_NAME, 
 Min(SP_P.MinPrice) as 'MinPrice'
  from Category C inner join (
 	select P.*, SP.MinPrice from product P inner join (
@@ -9,4 +9,3 @@ Min(SP_P.MinPrice) as 'MinPrice'
 ) as SP_P
 on C.CAT_ID = SP_P.CAT_ID
 group by SP_P.CAT_ID
-
