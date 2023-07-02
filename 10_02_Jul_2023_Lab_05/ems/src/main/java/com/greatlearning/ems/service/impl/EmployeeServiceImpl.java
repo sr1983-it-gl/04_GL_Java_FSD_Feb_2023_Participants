@@ -40,4 +40,11 @@ public class EmployeeServiceImpl
 		return employeeRepository.findById(id).get();
 	}
 
+	@Override
+	public void deleteEmployee(Long id) {
+		
+		employeeRepository.deleteById(id);		
+	}
+
+	
 }

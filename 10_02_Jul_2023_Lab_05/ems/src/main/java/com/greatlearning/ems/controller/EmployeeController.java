@@ -82,7 +82,14 @@ public class EmployeeController {
 				employeeObjWithUserValues.getEmailId());
 		
 		employeeService.saveEmployee(existingEmployeeObjFromDB);
-		return "redirect:/employees";
+		return "redirect:/employees";		
+	}
+	
+	@GetMapping("/employees/{id}")
+	public String deleteEmployee(
+		@PathVariable Long id) {
 		
+		employeeService.deleteEmployee(id);
+		return "redirect:/employees";		
 	}
 }
