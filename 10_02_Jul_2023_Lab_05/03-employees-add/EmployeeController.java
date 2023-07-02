@@ -1,4 +1,7 @@
-	@GetMapping("/employees/new")
+import org.springframework.web.bind.annotation.PostMapping;
+
+	
+    @GetMapping("/employees/new")
 	public String addEmployeeStep1(Model model) {
 		
 		Employee employee = new Employee();
