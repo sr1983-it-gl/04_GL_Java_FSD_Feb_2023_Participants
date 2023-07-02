@@ -1,0 +1,1 @@
+	void deleteEmployee(Long id);
