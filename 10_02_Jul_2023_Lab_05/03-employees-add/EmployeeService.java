@@ -1,2 +1,0 @@
-
-	void saveEmployee(Employee employee);
