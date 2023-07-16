@@ -1,4 +1,3 @@
-
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
@@ -36,29 +35,20 @@
 			<input type="hidden" name="id" value="${Book.id}" />
 
 			<div class="form-inline">
-				<input type="text" name="name" value="${Book.name}"
-					class="form-control mb-4 col-4" placeholder="Name">
-
-
-
+				<input type="text" name="title" value="${Book.title}"
+					class="form-control mb-4 col-4" placeholder="Title">
 			</div>
 
 			<div class="form-inline">
 
 				<input type="text" name="category" value="${Book.category}"
 					class="form-control mb-4 col-4" placeholder="Category">
-
-
-
 			</div>
 
 			<div class="form-inline">
 
 				<input type="text" name="author" value="${Book.author}"
 					class="form-control mb-4 col-4" placeholder="Author">
-
-
-
 			</div>
 
 			<button type="submit" class="btn btn-info col-2">Save</button>
@@ -66,8 +56,8 @@
 		</form>
 
 		<hr>
+		
 		<c:url var="listUrl" value= "/books/list"/>
-
 		<a href="${listUrl}">Back to Books List</a>
 
 	</div>

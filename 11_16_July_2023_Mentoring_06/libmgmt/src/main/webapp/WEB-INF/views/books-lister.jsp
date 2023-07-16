@@ -24,38 +24,37 @@
         <hr>
                 
 
+
 		<c:url var="searchUrl" value="/books/search" />
 
 		<form action="${searchUrl}" class="form-inline">
 		
-			<c:url var="addUrl" value="/books/showFormForAdd" />
-			
-			<!-- Add a button -->
-			<a href="${addUrl}" class="btn btn-primary btn-sm mb-3"> Add Book </a> 
-		
-		    <input type="search" 
-		        name="name" placeholder="Name"
-		        class="form-control-sm ml-5 mr-2 mb-3" /> 
-		    <input type="search"
-		        name="author" placeholder="Author" 
-		        class="form-control-sm mr-2 mb-3" />
-		
-		    <button type="submit" class="btn btn-success btn-sm mb-3">Search</button>
-		
-		
-			<c:url var="logoutUrl" value="/logout" />
-			
-			<a href="${logoutUrl}" class="btn btn-primary btn-sm mb-3 mx-auto">
-				Logout 
-			</a>
-		
-		</form>
-		
 
+		<c:url var="addUrl" value="/books/addStep1" />	
+		<!-- Add a button -->
+		<a href="${addUrl}" class="btn btn-primary btn-sm mb-3"> Add Book </a> 
+
+		
+	    <input type="search" 
+	        name="title" placeholder="Title"
+	        class="form-control-sm ml-5 mr-2 mb-3" /> 
+	    <input type="search"
+	        name="author" placeholder="Author" 
+	        class="form-control-sm mr-2 mb-3" />
+	
+	    <button type="submit" class="btn btn-success btn-sm mb-3">Search</button>
+		    
+		<c:url var="logoutUrl" value = "/logout" />
+		<a href="${logoutUrl}" class= "btn btn-success btn-sm mb-3">
+			Logout
+		</a>
+			
+		</form>
+			
         <table class="table table-bordered table-striped">
           <thead class="thead-dark">
             <tr>
-              <th>Name</th>
+              <th>Title</th>
               <th>Category</th>
               <th>Author</th>
 
@@ -68,7 +67,7 @@
             <c:forEach items="${Books}" var="tempBook">
               <tr>
                 <td>
-                  <c:out value="${tempBook.name}" />
+                  <c:out value="${tempBook.title}" />
                 </td>
                 <td>
                   <c:out value="${tempBook.category}" />
@@ -78,24 +77,24 @@
                 </td>
                 
                 
-				<td>
+                <td>
 				    <!-- Add "update" button/link -->
 				
-				    <c:url var="updateUrl" value="/books/showFormForUpdate?bookId=${tempBook.id}" />
+				    <c:url var="updateUrl" value="/books/updateStep1?bookId=${tempBook.id}" />
 				
 				    <a href="${updateUrl}" class="btn btn-info btn-sm"> Update 
 				    </a> 
-				
-				
+				    
+				    
 					<c:url var="deleteUrl" value="/books/delete?bookId=${tempBook.id}" />
 					
 					<a href="${deleteUrl}" class="btn btn-danger btn-sm"
 					onclick="if (!(confirm('Are you sure you want to delete this employee?'))) return false">
 					Delete 
 					</a>
-				
-				</td>                
-
+									    
+				</td>
+                
               </tr>
             </c:forEach>
 
