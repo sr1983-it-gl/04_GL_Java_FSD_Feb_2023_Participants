@@ -1,0 +1,9 @@
+insert into book (id, name, author, category) values (1, 'Java Programmming', 'Martin Fowler', 'Programming');
+
+Insert into book (id, name, author, category) values (2, "Lord of the Rings", "Tolkien, J.R.", "Adventure Fantasy");
+
+Insert into book (id, name, author, category) values (3, "Harry Potter", "Rowling, J.K.", "Adventure Fantasy");
+
+Insert into book (id, name, author, category) values (4, "The Hours", "Cunnningham, Michael", "Family Drama");
+
+insert into book (id, name, author, category) values (5, 'Python', 'Python', 'Programming');
