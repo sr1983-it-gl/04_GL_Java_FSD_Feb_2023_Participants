@@ -1,0 +1,18 @@
+protected void configure(HttpSecurity http) throws Exception {
+
+    http.authorizeRequests()
+        .antMatchers("/", "/books/save", "/books/showFormForAdd", "/books/403")
+            .hasAnyAuthority("REGULAR_USER", "ADMIN_USER")
+        .antMatchers("/books/showFormForUpdate", "/books/delete")
+            .hasAuthority("ADMIN_USER")
+        .anyRequest().authenticated()
+        .and()
+        .formLogin().loginProcessingUrl("/login").successForwardUrl("/books/list").permitAll()
+        .and()
+        .logout().logoutSuccessUrl("/login").permitAll()
+        .and()
+        .exceptionHandling().accessDeniedPage("/books/403")
+        .and()
+        .cors().and().csrf().disable();
+
+}
