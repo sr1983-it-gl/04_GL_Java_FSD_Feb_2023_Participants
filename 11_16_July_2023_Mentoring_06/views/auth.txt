@@ -1,0 +1,36 @@
+# “mypassword”
+# $2a$12$ncVKTp7LOrPWiHqyEDginOO/4o4abR9rvbYbv5nX1wejkjMWHdAfm
+
+
+set @PASSWORD = '$2a$12$ncVKTp7LOrPWiHqyEDginOO/4o4abR9rvbYbv5nX1wejkjMWHdAfm';
+
+set @REGULAR_USER = 'REGULAR_USER';
+set @ADMIN_USER = 'ADMIN_USER';
+
+set @REGULAR_USER_1 = 'sanjay';
+set @ADMIN_USER_1 = 'varun';
+
+
+insert into roles (role_id, name) values (1, @REGULAR_USER);
+insert into roles (role_id, name) values (2, @ADMIN_USER);
+
+
+insert into users (user_id, username, password) values (
+1, @ADMIN_USER_1, @PASSWORD);
+
+
+insert into users (user_id, username, password) values (
+2, @REGULAR_USER_1, @PASSWORD);
+
+
+insert into users_roles (user_id, role_id) values (
+(select user_id from users where username = @ADMIN_USER_1),
+(select role_id from roles where name = @ADMIN_USER)
+);
+
+
+insert into users_roles (user_id, role_id) values (
+(select user_id from users where username = @REGULAR_USER_1),
+(select role_id from roles where name = @REGULAR_USER)
+);
+
