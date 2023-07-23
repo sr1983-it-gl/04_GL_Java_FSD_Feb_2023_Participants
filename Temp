@@ -1,81 +1,36 @@
-package com.greatlearning.sra.entity;
+# “mypassword”
+# $2a$12$ncVKTp7LOrPWiHqyEDginOO/4o4abR9rvbYbv5nX1wejkjMWHdAfm
 
-import java.util.ArrayList;
-import java.util.List;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.Table;
+set @PASSWORD = '$2a$12$ncVKTp7LOrPWiHqyEDginOO/4o4abR9rvbYbv5nX1wejkjMWHdAfm';
 
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
+set @REGULAR_USER = 'REGULAR_USER';
+set @ADMIN_USER = 'ADMIN_USER';
 
-//@Getter
-//@Setter
-//@Data
+set @REGULAR_USER_1 = 'sanjay';
+set @ADMIN_USER_1 = 'varun';
 
-@Entity(name = "User")
-@Table(name = "users")
 
-public class User {
+insert into roles (role_id, name) values (1, @REGULAR_USER);
+insert into roles (role_id, name) values (2, @ADMIN_USER);
 
-	@Id
-	@Column(name = "user_id")
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
-	
-	@Column(name = "username")	
-	private String username;
-	
-	@Column(name = "password")
-	private String password;
-	
-	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	@JoinTable(
-			name = "users_roles",
-			joinColumns = @JoinColumn(name = "user_id"),
-			inverseJoinColumns = @JoinColumn(name = "role_id")
-	)
-	private List<Role> roles = new ArrayList<>();
 
-	public Integer getId() {
-		return id;
-	}
+insert into users (user_id, username, password) values (
+1, @ADMIN_USER_1, @PASSWORD);
 
-	public void setId(Integer id) {
-		this.id = id;
-	}
 
-	public String getUsername() {
-		return username;
-	}
+insert into users (user_id, username, password) values (
+2, @REGULAR_USER_1, @PASSWORD);
 
-	public void setUsername(String username) {
-		this.username = username;
-	}
 
-	public String getPassword() {
-		return password;
-	}
+insert into users_roles (user_id, role_id) values (
+(select user_id from users where username = @ADMIN_USER_1),
+(select role_id from roles where name = @ADMIN_USER)
+);
 
-	public void setPassword(String password) {
-		this.password = password;
-	}
 
-	public List<Role> getRoles() {
-		return roles;
-	}
+insert into users_roles (user_id, role_id) values (
+(select user_id from users where username = @REGULAR_USER_1),
+(select role_id from roles where name = @REGULAR_USER)
+);
 
-	public void setRoles(List<Role> roles) {
-		this.roles = roles;
-	}	
-}
