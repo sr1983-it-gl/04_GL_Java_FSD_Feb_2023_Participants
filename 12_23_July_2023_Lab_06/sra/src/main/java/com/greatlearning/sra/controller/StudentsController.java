@@ -53,6 +53,13 @@ public class StudentsController {
 		
 		if (id != 0) {
 			
+			studentObj = studentService.findById(id);
+			
+			studentObj.setFirstName(firstName);
+			studentObj.setLastName(lastName);
+			studentObj.setCourse(course);
+			studentObj.setCountry(country);
+			
 			// Update Flow
 		}else {
 			
@@ -65,4 +72,21 @@ public class StudentsController {
 		
 		return "redirect:/students/list";
 	}
+	
+	
+	@RequestMapping("/update-show-form")
+	public String updateStudentStep1(
+			
+		@RequestParam("studentId") int studentId,
+		Model modelObj) 
+	{
+		
+		Student studentObj = 
+				studentService.findById(studentId);
+		
+		modelObj.addAttribute("student", studentObj);
+		
+		return "student-form";
+	}
+	
 }

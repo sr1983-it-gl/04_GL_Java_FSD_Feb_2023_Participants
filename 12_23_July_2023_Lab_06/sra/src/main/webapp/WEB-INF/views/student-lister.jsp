@@ -49,7 +49,13 @@
 						<td><c:out value="${tempStudent.lastName}" /></td>
 						<td><c:out value="${tempStudent.course}" /></td>
 						<td><c:out value="${tempStudent.country}" /></td>
-						
+					
+						<td>
+							<c:url var="updateUrl" value="/students/update-show-form?studentId=${tempStudent.id}" />
+							<a href="${updateUrl}" class="btn btn-primary">
+								Update
+							</a>
+						</td>
 
 					</tr>
 				</c:forEach>

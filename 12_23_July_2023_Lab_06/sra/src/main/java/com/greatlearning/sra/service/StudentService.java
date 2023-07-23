@@ -10,4 +10,6 @@ public interface StudentService {
 	
 	void add(Student studentObj);
 	
+	Student findById(int studentId);
+	
 }

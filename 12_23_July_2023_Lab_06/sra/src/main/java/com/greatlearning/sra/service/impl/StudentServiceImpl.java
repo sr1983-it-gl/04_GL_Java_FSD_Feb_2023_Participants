@@ -32,4 +32,10 @@ public class StudentServiceImpl
 		
 	}
 
+	@Override
+	public Student findById(int studentId) {
+		
+		return studentRepository.findById(studentId).get();
+	}
+
 }
