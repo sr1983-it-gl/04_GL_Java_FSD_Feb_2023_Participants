@@ -1,87 +1,91 @@
-package com.greatlearning.sra.entity;
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+<head>
+<!-- Required meta tags -->
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
+<!-- Bootstrap CSS -->
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+	integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
+	crossorigin="anonymous">
 
-@Entity
-@Table(name="student")
-public class Student {
+<title>Students Directory</title>
+</head>
 
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="id")
-	private int id;
+<body>
 
+	<div class="container">
 
-	@Column(name="firstName")
-	private String firstName;
+		<h3>Students Directory</h3>
+		<hr>
 
+	    <c:url var="addUrl" value="/students/showFormForAdd" />
+		<a href="${addUrl}" class="btn btn-primary btn-sm mb-3"> 
+	        Add Student 
+	    </a>
 
-	@Column(name="lastName")
-	private String lastName;
-
-
-	@Column(name="course")
-	private String course;
-	
-	@Column(name="country")
-	private String country;
-
-	public Student()
-	{
+		<c:url var="logoutUrl" value="/logout" />
 		
-	}
-	
-	public Student(String firstName, String lastName, String course, String country) {
-		
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.course = course;
-		this.country = country;
-	}
+		<a href="${logoutUrl}" class="btn btn-primary btn-sm mb-3 mx-auto">
+			Logout 
+		</a>
 
-	public int getId() {
-		return id;
-	}
+		<table class="table table-bordered table-striped">
+			<thead class="thead-dark">
+				<tr>
+					<th>FirstName</th>
+					<th>LastName</th>
+					<th>Course</th>
+					<th>Country</th>
+					<th>Action</th>
+				</tr>
+			</thead>
 
-	public void setId(int id) {
-		this.id = id;
-	}
+			<tbody>
+				<c:forEach items="${students}" var="tempStudent">
+					<tr>
+						<td><c:out value="${tempStudent.firstName}" /></td>
+						<td><c:out value="${tempStudent.lastName}" /></td>
+						<td><c:out value="${tempStudent.course}" /></td>
+						<td><c:out value="${tempStudent.country}" /></td>
+						
+					    <td>
+					
+					        <c:url var="updateUrl"
+					            value="/students/showFormForUpdate?studentId=${tempStudent.id}" />								
+					        <a
+					        href="${updateUrl}"
+					        class="btn btn-info btn-sm"> 
+					            Update 
+					        </a> 
+					
+					
+						    <c:url var="deleteUrl"
+						        value="/students/delete?studentId=${tempStudent.id}" />															
+						    <a
+						    href="${deleteUrl}"
+						    class="btn btn-danger btn-sm"
+						    onclick="if (!(confirm('Are you sure you want to delete this Student?'))) return false">
+						        Delete 
+						    </a>
+					
+					    </td>
 
-	public String getFirstName() {
-		return firstName;
-	}
 
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
+					</tr>
+				</c:forEach>
 
-	public String getLastName() {
-		return lastName;
-	}
+			</tbody>
+		</table>
 
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
+	</div>
 
-	public String getCourse() {
-		return course;
-	}
-
-	public void setCourse(String course) {
-		this.course = course;
-	}
-
-	public String getCountry() {
-		return country;
-	}
-
-	public void setCountry(String country) {
-		this.country = country;
-	}
-}
+</body>
+</html>
