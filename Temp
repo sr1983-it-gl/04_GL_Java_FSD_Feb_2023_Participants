@@ -1,3 +1,82 @@
+
+
+
+	@Override
+	protected void configure(HttpSecurity http) throws Exception {
+
+	    http.authorizeRequests()
+	        .antMatchers("/", "/students/save", "/students/showFormForAdd", "/students/403")
+	            .hasAnyAuthority("REGULAR_USER", "ADMIN_USER")
+	        .antMatchers("/students/showFormForUpdate", "/students/delete")
+	            .hasAuthority("ADMIN_USER")
+	        .anyRequest().authenticated()
+	        .and()
+	        .formLogin().loginProcessingUrl("/login").successForwardUrl("/students/list").permitAll()
+	        .and()
+	        .logout().logoutSuccessUrl("/login").permitAll()
+	        .and()
+	        .exceptionHandling().accessDeniedPage("/students/403")
+	        .and()
+	        .cors().and().csrf().disable();
+
+	}
+
+---
+
+
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<!DOCTYPE html>
+
+<html>
+<body>
+	<h1>HTTP Status 403 - Access is denied</h1>
+	<h2>${msg}</h2>
+	
+    <hr>
+    
+	<c:url var="listUrl" value= "/students/list"/>
+
+    <a href="${listUrl}">Back to listing students...</a>    
+	
+</body>
+</html>
+
+
+---
+
+
+	@RequestMapping(value = "/403")
+	public ModelAndView handleForbiddenError(Principal user) {
+	    
+	    ModelAndView mv = new ModelAndView();
+	    
+	    mv.setViewName("403");
+	    
+	    String message = "";
+	    if (user != null) {
+	        
+	        message = "Hello " + user.getName() + ", "
+	            + " You dont have permission to access the page / perform the operation";						
+	    }else {
+
+	        message = "Hello " + ", "
+	                + " You dont have permission to access the page / perform the operation";									
+	    }
+	    
+	    mv.addObject("msg", message);
+	    
+	    return mv;		
+	}
+
+
+---
+
+
+
+--
+
 # “mypassword”
 # $2a$12$ncVKTp7LOrPWiHqyEDginOO/4o4abR9rvbYbv5nX1wejkjMWHdAfm
 
