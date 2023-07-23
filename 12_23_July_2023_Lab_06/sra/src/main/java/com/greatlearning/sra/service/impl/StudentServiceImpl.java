@@ -38,4 +38,10 @@ public class StudentServiceImpl
 		return studentRepository.findById(studentId).get();
 	}
 
+	@Override
+	public void deleteById(int studentId) {
+		
+		studentRepository.deleteById(studentId);
+	}
+
 }

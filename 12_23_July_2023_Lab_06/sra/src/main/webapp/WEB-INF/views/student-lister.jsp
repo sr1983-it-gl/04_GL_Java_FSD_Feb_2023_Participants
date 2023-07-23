@@ -51,10 +51,20 @@
 						<td><c:out value="${tempStudent.country}" /></td>
 					
 						<td>
+						
 							<c:url var="updateUrl" value="/students/update-show-form?studentId=${tempStudent.id}" />
-							<a href="${updateUrl}" class="btn btn-primary">
+							<a href="${updateUrl}" class="btn btn-primary btn-sm">
 								Update
 							</a>
+							
+							
+ 						   <c:url var="deleteUrl"
+						        value="/students/delete?studentId=${tempStudent.id}" />															
+						    <a href="${deleteUrl}"
+						    class="btn btn-danger btn-sm"
+						    onclick="if (!(confirm('Are you sure you want to delete this Student?'))) return false">
+						        Delete 
+						    </a>							
 						</td>
 
 					</tr>
