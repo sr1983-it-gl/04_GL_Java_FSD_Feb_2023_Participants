@@ -1,8 +1,165 @@
-						    <c:url var="deleteUrl"
-						        value="/students/delete?studentId=${tempStudent.id}" />															
-						    <a
-						    href="${deleteUrl}"
-						    class="btn btn-danger btn-sm"
-						    onclick="if (!(confirm('Are you sure you want to delete this Student?'))) return false">
-						        Delete 
-						    </a>
+
+
+package com.greatlearning.sra.entity;
+
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+
+//@Getter
+//@Setter
+//@Data
+
+@Entity
+@Table(name = "roles")
+public class Role {
+
+	@Id
+	@Column(name = "role_id")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer id;
+	
+	@Column(name = "name")
+	private String name;
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+	
+}
+
+--
+
+
+	@Override
+	protected void configure(HttpSecurity http) throws Exception {
+
+	    http.authorizeRequests()
+	        .antMatchers("/", "/students/save", "/students/showFormForAdd", "/students/403")
+	            .hasAnyAuthority("REGULAR_USER", "ADMIN_USER")
+	        .antMatchers("/students/showFormForUpdate", "/students/delete")
+	            .hasAuthority("ADMIN_USER")
+	        .anyRequest().authenticated()
+	        .and()
+	        .formLogin().loginProcessingUrl("/login").successForwardUrl("/students/list").permitAll()
+	        .and()
+	        .logout().logoutSuccessUrl("/login").permitAll()
+	        .and()
+	        .exceptionHandling().accessDeniedPage("/students/403")
+	        .and()
+	        .cors().and().csrf().disable();
+
+	}
+
+---
+
+
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<!DOCTYPE html>
+
+<html>
+<body>
+	<h1>HTTP Status 403 - Access is denied</h1>
+	<h2>${msg}</h2>
+	
+    <hr>
+    
+	<c:url var="listUrl" value= "/students/list"/>
+
+    <a href="${listUrl}">Back to listing students...</a>    
+	
+</body>
+</html>
+
+
+---
+
+
+	@RequestMapping(value = "/403")
+	public ModelAndView handleForbiddenError(Principal user) {
+	    
+	    ModelAndView mv = new ModelAndView();
+	    
+	    mv.setViewName("403");
+	    
+	    String message = "";
+	    if (user != null) {
+	        
+	        message = "Hello " + user.getName() + ", "
+	            + " You dont have permission to access the page / perform the operation";						
+	    }else {
+
+	        message = "Hello " + ", "
+	                + " You dont have permission to access the page / perform the operation";									
+	    }
+	    
+	    mv.addObject("msg", message);
+	    
+	    return mv;		
+	}
+
+
+---
+
+
+
+--
+
+# “mypassword”
+# $2a$12$ncVKTp7LOrPWiHqyEDginOO/4o4abR9rvbYbv5nX1wejkjMWHdAfm
+
+
+set @PASSWORD = '$2a$12$ncVKTp7LOrPWiHqyEDginOO/4o4abR9rvbYbv5nX1wejkjMWHdAfm';
+
+set @REGULAR_USER = 'REGULAR_USER';
+set @ADMIN_USER = 'ADMIN_USER';
+
+set @REGULAR_USER_1 = 'sanjay';
+set @ADMIN_USER_1 = 'varun';
+
+
+insert into roles (role_id, name) values (1, @REGULAR_USER);
+insert into roles (role_id, name) values (2, @ADMIN_USER);
+
+
+insert into users (user_id, username, password) values (
+1, @ADMIN_USER_1, @PASSWORD);
+
+
+insert into users (user_id, username, password) values (
+2, @REGULAR_USER_1, @PASSWORD);
+
+
+insert into users_roles (user_id, role_id) values (
+(select user_id from users where username = @ADMIN_USER_1),
+(select role_id from roles where name = @ADMIN_USER)
+);
+
+
+insert into users_roles (user_id, role_id) values (
+(select user_id from users where username = @REGULAR_USER_1),
+(select role_id from roles where name = @REGULAR_USER)
+);
+
