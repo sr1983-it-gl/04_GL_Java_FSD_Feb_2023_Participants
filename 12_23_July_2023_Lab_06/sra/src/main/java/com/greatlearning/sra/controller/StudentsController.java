@@ -31,6 +31,14 @@ public class StudentsController {
 		return "student-lister";
 	}
 	
+//	@RequestMapping("/list")
+//	public String listAllStudentsv2(Model modelObj) {
+//		
+//		studentService.findAllv2(modelObj);				
+//		return "student-lister";
+//	}
+	
+	
 	@RequestMapping("/add-show-form")
 	public String addStudentStep1(Model modelObj) {
 		
@@ -50,27 +58,8 @@ public class StudentsController {
 		@RequestParam("course") String course,
 		@RequestParam("country") String country		
 		) {
-		
-		Student studentObj = null;
-		
-		if (id != 0) {
-			
-			studentObj = studentService.findById(id);
-			
-			studentObj.setFirstName(firstName);
-			studentObj.setLastName(lastName);
-			studentObj.setCourse(course);
-			studentObj.setCountry(country);
-			
-			// Update Flow
-		}else {
-			
-			// Add Flow
-			
-			studentObj = new Student(firstName, lastName, course, country);
-		}
-		
-		studentService.add(studentObj);
+				
+		studentService.insertOrUpdate(id, firstName, lastName, course, country);
 		
 		return "redirect:/students/list";
 	}
@@ -107,22 +96,11 @@ public class StudentsController {
 	public ModelAndView handleForbiddenError(
 			Principal user) {
 	    
-	    ModelAndView mv = new ModelAndView();
-	    
-	    mv.setViewName("403");
-	    
-	    String message = "";
-	    if (user != null) {
-	        
-	        message = "Hello " + user.getName() + ", "
-	            + " You dont have permission to access the page / perform the operation";						
-	    }else {
+	    ModelAndView mv = new ModelAndView();	    
+	    mv.setViewName("403");	    
 
-	        message = "Hello " + ", "
-	                + " You dont have permission to access the page / perform the operation";									
-	    }
-	    
-	    mv.addObject("msg", message);
+	    mv.addObject("msg", 
+	    	studentService.getAuthorizationErrorMessage(user));
 	    
 	    return mv;		
 	}	
