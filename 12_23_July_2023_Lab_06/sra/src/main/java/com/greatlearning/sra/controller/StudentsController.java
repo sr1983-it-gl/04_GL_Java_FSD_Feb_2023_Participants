@@ -1,5 +1,6 @@
 package com.greatlearning.sra.controller;
 
+import java.security.Principal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.greatlearning.sra.entity.Student;
 import com.greatlearning.sra.service.StudentService;
@@ -99,4 +101,29 @@ public class StudentsController {
 		
 		return "redirect:/students/list";
 	}
+	
+	
+	@RequestMapping(value = "/403")
+	public ModelAndView handleForbiddenError(
+			Principal user) {
+	    
+	    ModelAndView mv = new ModelAndView();
+	    
+	    mv.setViewName("403");
+	    
+	    String message = "";
+	    if (user != null) {
+	        
+	        message = "Hello " + user.getName() + ", "
+	            + " You dont have permission to access the page / perform the operation";						
+	    }else {
+
+	        message = "Hello " + ", "
+	                + " You dont have permission to access the page / perform the operation";									
+	    }
+	    
+	    mv.addObject("msg", message);
+	    
+	    return mv;		
+	}	
 }

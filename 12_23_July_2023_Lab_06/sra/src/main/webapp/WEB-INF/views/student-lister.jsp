@@ -31,6 +31,11 @@
 			Add Student
 		</a>
 
+		<c:url var="logoutURL" value = "/logout" />
+		<a href="${logoutURL}" class = "btn btn-primary mb-3 btn-sm">	
+			Logout
+		</a>
+
 		<table class="table table-bordered table-striped">
 			<thead class="thead-dark">
 				<tr>
